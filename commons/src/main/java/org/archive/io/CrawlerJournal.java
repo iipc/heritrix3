@@ -19,7 +19,7 @@
 package org.archive.io;
 
 import it.unimi.dsi.fastutil.io.FastBufferedOutputStream;
-import it.unimi.dsi.mg4j.util.MutableString;
+import it.unimi.dsi.lang.MutableString;
 
 import java.io.Closeable;
 import java.io.File;

@@ -17,7 +17,7 @@ http://maven.apache.org/guides/mini/guide-m1-m2.html
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.archive</groupId>
+	<groupId>org.netpreserve.heritrix</groupId>
 	<!--This project is parent to all under 'projects' subdirectory-->
 	<artifactId>heritrix</artifactId>
 	<version>3.1.2-SNAPSHOT</version>
@@ -53,10 +53,12 @@ http://maven.apache.org/guides/mini/guide-m1-m2.html
 		<system>JIRA</system>
 		<url>http://webteam.archive.org/jira</url>
 	</issueManagement>
+<!--
 	<ciManagement>
 		<system>continuum</system>
 		<url>http://builds.archive.org:8081/continuum/</url>
 	</ciManagement>
+-->
 	<mailingLists>
 		<mailingList>
 			<name>Crawler Discussion List</name>
@@ -82,25 +84,6 @@ http://maven.apache.org/guides/mini/guide-m1-m2.html
 			</archive>
 		</mailingList>
 	</mailingLists>
-
-	<pluginRepositories>
-		<pluginRepository>
-			<releases>
-				<enabled>true</enabled>
-				<updatePolicy>daily</updatePolicy>
-				<checksumPolicy>warn</checksumPolicy>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-				<updatePolicy>never</updatePolicy>
-				<checksumPolicy>fail</checksumPolicy>
-			</snapshots>
-			<id>archive</id>
-			<name>archive.org</name>
-			<url>http://builds.archive.org:8080/maven2</url>
-			<layout>default</layout>
-		</pluginRepository>
-	</pluginRepositories>
 
 	<scm>
 		<connection>
@@ -141,6 +124,18 @@ http://maven.apache.org/guides/mini/guide-m1-m2.html
 		<module>engine</module>
 		<module>dist</module>
 	</modules>
+
+<repositories>
+  <repository>
+    <id>oracleReleases</id>
+    <name>Oracle Released Java Packages</name>
+    <url>http://download.oracle.com/maven</url>
+    <releases>
+      <enabled>true</enabled>
+    </releases>
+    <snapshots />
+  </repository>
+</repositories>
 
 
 	<distributionManagement>

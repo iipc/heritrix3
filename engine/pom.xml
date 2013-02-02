@@ -10,8 +10,8 @@
 	<artifactId>heritrix-engine</artifactId>
 	<packaging>jar</packaging>
 	<name>Heritrix 3: 'engine' subproject</name>
-
 	<repositories>
+<!--
 		<repository>
 			<releases>
 				<enabled>true</enabled>
@@ -28,6 +28,7 @@
 			<url>http://builds.archive.org:8080/maven2</url>
 			<layout>default</layout>
 		</repository>
+-->
 
 		<repository>
 			<id>maven-restlet</id>
@@ -35,7 +36,6 @@
 			<url>http://maven.restlet.org</url>
 		</repository>
 	</repositories>
-
 	<dependencies>
 		<dependency>
 			<groupId>org.archive.heritrix</groupId>

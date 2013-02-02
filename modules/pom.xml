@@ -17,7 +17,7 @@
 		be used in applications other than Heritrix, however.
 
 	</description>
-
+<!--
 	<repositories>
 		<repository>
 			<releases>
@@ -36,7 +36,7 @@
 			<layout>default</layout>
 		</repository>
 	</repositories>
-
+-->
 	<dependencies>
 		<dependency>
 			<groupId>org.archive.heritrix</groupId>
