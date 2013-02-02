@@ -101,17 +101,17 @@ http://maven.apache.org/guides/mini/guide-m1-m2.html
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
-				<groupId>org.archive.heritrix</groupId>
+				<groupId>org.netpreserve.heritrix</groupId>
 				<artifactId>commons</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>org.archive.heritrix</groupId>
+				<groupId>org.netpreserve.heritrix</groupId>
 				<artifactId>modules</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>org.archive.heritrix</groupId>
+				<groupId>org.netpreserve.heritrix</groupId>
 				<artifactId>engine</artifactId>
 				<version>${project.version}</version>
 			</dependency>
