@@ -1,5 +1,4 @@
-bin
-commons/target
-modules/target
-engine/target
-dist/target
+.project
+.classpath
+.settings
+target
