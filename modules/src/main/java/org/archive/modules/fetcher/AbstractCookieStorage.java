@@ -19,7 +19,7 @@
 
 package org.archive.modules.fetcher;
 
-import it.unimi.dsi.mg4j.util.MutableString;
+import it.unimi.dsi.lang.MutableString;
 
 import java.io.BufferedReader;
 import java.io.Closeable;

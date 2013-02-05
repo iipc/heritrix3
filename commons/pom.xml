@@ -260,6 +260,12 @@
 			</exclusions>
 		</dependency>
 
+		<dependency>
+		   <groupId>commons-httpclient</groupId>
+		   <artifactId>commons-httpclient</artifactId>
+		   <version>3.1</version>
+		   <scope>provided</scope>
+		</dependency>
 	</dependencies>
 	<build>
 		<resources>
@@ -327,15 +333,6 @@
 						</configuration>
 					</execution>
 				</executions>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>1.5</source>
-					<target>1.5</target>
-				</configuration>
 			</plugin>
 
 			<plugin>
