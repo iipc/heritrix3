@@ -15,9 +15,16 @@ http://maven.apache.org/guides/mini/guide-m1-m2.html
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.archive</groupId>
+
+  <parent>
+    <groupId>org.sonatype.oss</groupId>
+    <artifactId>oss-parent</artifactId>
+    <version>7</version>
+  </parent>
+
+
+	<groupId>org.netpreserve.heritrix</groupId>
 	<!--This project is parent to all under 'projects' subdirectory-->
 	<artifactId>heritrix</artifactId>
 	<version>3.1.2-SNAPSHOT</version>
@@ -53,10 +60,12 @@ http://maven.apache.org/guides/mini/guide-m1-m2.html
 		<system>JIRA</system>
 		<url>http://webteam.archive.org/jira</url>
 	</issueManagement>
+<!--
 	<ciManagement>
 		<system>continuum</system>
 		<url>http://builds.archive.org:8081/continuum/</url>
 	</ciManagement>
+-->
 	<mailingLists>
 		<mailingList>
 			<name>Crawler Discussion List</name>
@@ -83,24 +92,14 @@ http://maven.apache.org/guides/mini/guide-m1-m2.html
 		</mailingList>
 	</mailingLists>
 
-	<pluginRepositories>
-		<pluginRepository>
-			<releases>
-				<enabled>true</enabled>
-				<updatePolicy>daily</updatePolicy>
-				<checksumPolicy>warn</checksumPolicy>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-				<updatePolicy>never</updatePolicy>
-				<checksumPolicy>fail</checksumPolicy>
-			</snapshots>
-			<id>archive</id>
-			<name>archive.org</name>
-			<url>http://builds.archive.org:8080/maven2</url>
-			<layout>default</layout>
-		</pluginRepository>
-	</pluginRepositories>
+	<scm>
+		<connection>
+			scm:svn:https://archive-crawler.svn.sourceforge.net/svnroot/archive-crawler/trunk/heritrix3
+		</connection>
+		<url>
+			https://archive-crawler.svn.sourceforge.net/svnroot/archive-crawler/trunk/heritrix3
+		</url>
+	</scm>
 
 	<prerequisites>
 		<maven>2.0.9</maven>
@@ -109,17 +108,17 @@ http://maven.apache.org/guides/mini/guide-m1-m2.html
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
-				<groupId>org.archive.heritrix</groupId>
+				<groupId>org.netpreserve.heritrix</groupId>
 				<artifactId>commons</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>org.archive.heritrix</groupId>
+				<groupId>org.netpreserve.heritrix</groupId>
 				<artifactId>modules</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>org.archive.heritrix</groupId>
+				<groupId>org.netpreserve.heritrix</groupId>
 				<artifactId>engine</artifactId>
 				<version>${project.version}</version>
 			</dependency>
@@ -132,6 +131,18 @@ http://maven.apache.org/guides/mini/guide-m1-m2.html
 		<module>engine</module>
 		<module>dist</module>
 	</modules>
+
+<repositories>
+  <repository>
+    <id>oracleReleases</id>
+    <name>Oracle Released Java Packages</name>
+    <url>http://download.oracle.com/maven</url>
+    <releases>
+      <enabled>true</enabled>
+    </releases>
+    <snapshots />
+  </repository>
+</repositories>
 
 
 	<distributionManagement>
@@ -381,6 +392,14 @@ http://maven.apache.org/guides/mini/guide-m1-m2.html
 					</execution>
 				</executions>
 			</plugin>
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <configuration>
+               <source>1.6</source>
+               <target>1.6</target>
+            </configuration>
+         </plugin>
 		</plugins>
 	</build>
 	<properties>

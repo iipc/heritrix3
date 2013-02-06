@@ -1,12 +1,11 @@
 <?xml version="1.0"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<parent>
-		<groupId>org.archive</groupId>
+		<groupId>org.netpreserve.heritrix</groupId>
 		<artifactId>heritrix</artifactId>
 		<version>3.1.2-SNAPSHOT</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.archive.heritrix</groupId>
 	<artifactId>heritrix-commons</artifactId>
 	<packaging>jar</packaging>
 	<name>Heritrix 3: 'commons' subproject (utility classes)</name>
@@ -15,46 +14,17 @@
 		libraries, as used by the Heritrix crawler and other projects.
 	</description>
 
-	<repositories>
-		<repository>
-			<releases>
-				<enabled>true</enabled>
-				<updatePolicy>always</updatePolicy>
-				<checksumPolicy>warn</checksumPolicy>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-				<updatePolicy>never</updatePolicy>
-				<checksumPolicy>fail</checksumPolicy>
-			</snapshots>
-			<id>oracleReleases</id>
-			<name>Oracle Released Java Packages</name>
-			<url>http://download.oracle.com/maven</url>
-			<layout>default</layout>
-		</repository>
-
-		<repository>
-			<releases>
-				<enabled>true</enabled>
-				<updatePolicy>always</updatePolicy>
-				<checksumPolicy>warn</checksumPolicy>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-				<updatePolicy>never</updatePolicy>
-				<checksumPolicy>fail</checksumPolicy>
-			</snapshots>
-			<id>internetarchive</id>
-			<name>Internet Archive Maven Repository</name>
-			<url>http://builds.archive.org:8080/maven2</url>
-			<layout>default</layout>
-		</repository>
-	</repositories>
-
 	<dependencies>
 
 
 		<!--
+
+		UPDATE: This overlay is still in place, but is now handled by the 
+		dependency:unpack plugin below. It unpacks the commons-httpclient
+		into target/classes, just ahead of the compile, which overlays the 
+		modifications.
+		
+		- - - -
 
 		This project requires "overlays".  There are custom patches we
 		apply to existing jar files from other projects (Apache).  Those
@@ -84,7 +54,6 @@
 		these projects, or heavens forfend you actually want to upgrade
 		them to some later version, you will have to repeat the
 		explode/delete/rejar/reinstall manual process.
-		-->
 
 		<dependency>
 			<groupId>org.archive.overlays</groupId>
@@ -92,6 +61,7 @@
 			<version>3.1</version>
 			<scope>compile</scope>
 		</dependency>
+		-->
 
 		<!-- These are normal dependencies. -->
 		<dependency>
@@ -150,7 +120,7 @@
 		<dependency>
 			<groupId>org.dnsjava</groupId>
 			<artifactId>dnsjava</artifactId>
-			<version>2.0.3</version>
+			<version>2.0.6</version>
 			<scope>compile</scope>
 		</dependency>
 		<!--
@@ -199,16 +169,18 @@
 		</dependency>
 		<dependency>
 			<groupId>it.unimi.dsi</groupId>
-			<artifactId>mg4j</artifactId>
-			<version>1.0.1</version>
+			<artifactId>dsiutils</artifactId>
+			<version>2.0.13</version>
 			<scope>compile</scope>
 		</dependency>
+<!--
 		<dependency>
 			<groupId>com.anotherbigidea</groupId>
 			<artifactId>javaswf</artifactId>
 			<version>CVS-SNAPSHOT-1</version>
 			<scope>compile</scope>
 		</dependency>
+-->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
@@ -246,19 +218,19 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.esotericsoftware</groupId>
+			<groupId>com.googlecode</groupId>
 			<artifactId>kryo</artifactId>
-			<version>1.01</version>
+			<version>1.04</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.esotericsoftware</groupId>
+			<groupId>com.esotericsoftware.reflectasm</groupId>
 			<artifactId>reflectasm</artifactId>
-			<version>0.8</version>
+			<version>1.07</version>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.esotericsoftware</groupId>
+			<groupId>com.esotericsoftware.minlog</groupId>
 			<artifactId>minlog</artifactId>
 			<version>1.2</version>
 			<scope>runtime</scope>
@@ -277,7 +249,7 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.archive</groupId>
+			<groupId>org.netpreserve.archive-commons</groupId>
 			<artifactId>archive-commons</artifactId>
 			<version>1.0-SNAPSHOT</version>
 			<exclusions>
@@ -288,6 +260,12 @@
 			</exclusions>
 		</dependency>
 
+		<dependency>
+		   <groupId>commons-httpclient</groupId>
+		   <artifactId>commons-httpclient</artifactId>
+		   <version>3.1</version>
+		   <scope>provided</scope>
+		</dependency>
 	</dependencies>
 	<build>
 		<resources>
@@ -299,6 +277,31 @@
 
 		<plugins>
 
+       <plugin>
+         <groupId>org.apache.maven.plugins</groupId>
+         <artifactId>maven-dependency-plugin</artifactId>
+         <version>2.6</version>
+         <executions>
+           <execution>
+             <id>unpack</id>
+             <phase>generate-resources</phase>
+             <goals>
+               <goal>unpack</goal>
+             </goals>
+             <configuration>
+               <artifactItems>
+                 <artifactItem>
+                   <groupId>commons-httpclient</groupId>
+                   <artifactId>commons-httpclient</artifactId>
+                   <version>3.1</version>
+                   <type>jar</type>
+		</artifactItem>
+               </artifactItems>
+<outputDirectory>target/classes</outputDirectory>
+</configuration>
+           </execution>
+         </executions>
+       </plugin>
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -330,15 +333,6 @@
 						</configuration>
 					</execution>
 				</executions>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>1.5</source>
-					<target>1.5</target>
-				</configuration>
 			</plugin>
 
 			<plugin>

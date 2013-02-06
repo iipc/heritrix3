@@ -1,17 +1,16 @@
 <?xml version="1.0"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<parent>
-		<groupId>org.archive</groupId>
+		<groupId>org.netpreserve.heritrix</groupId>
 		<artifactId>heritrix</artifactId>
 		<version>3.1.2-SNAPSHOT</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.archive.heritrix</groupId>
 	<artifactId>heritrix-engine</artifactId>
 	<packaging>jar</packaging>
 	<name>Heritrix 3: 'engine' subproject</name>
-
 	<repositories>
+<!--
 		<repository>
 			<releases>
 				<enabled>true</enabled>
@@ -28,6 +27,7 @@
 			<url>http://builds.archive.org:8080/maven2</url>
 			<layout>default</layout>
 		</repository>
+-->
 
 		<repository>
 			<id>maven-restlet</id>
@@ -35,10 +35,9 @@
 			<url>http://maven.restlet.org</url>
 		</repository>
 	</repositories>
-
 	<dependencies>
 		<dependency>
-			<groupId>org.archive.heritrix</groupId>
+			<groupId>org.netpreserve.heritrix</groupId>
 			<artifactId>heritrix-modules</artifactId>
 			<version>${project.version}</version>
 			<scope>compile</scope>
@@ -81,19 +80,16 @@
 			<artifactId>joda-time</artifactId>
 			<version>1.6</version>
 		</dependency>
+      <dependency>
+         <groupId>commons-httpclient</groupId>
+         <artifactId>commons-httpclient</artifactId>
+         <version>3.1</version>
+         <scope>provided</scope>
+      </dependency>
 	</dependencies>
 
 	<build>
 		<plugins>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>1.5</source>
-					<target>1.5</target>
-				</configuration>
-			</plugin>
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

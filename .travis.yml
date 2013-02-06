@@ -1,0 +1,11 @@
+language: java
+jdk:
+  - oraclejdk7
+before_script:
+ - "echo $JAVA_OPTS"
+ - "export JAVA_OPTS=-Xmx1024m"
+ - "echo $JAVA_OPTS"
+ - "export MAVEN_OPTS='-Xmx512m -XX:MaxPermSize=128m'"
+ - "ulimit -a"
+ - "ulimit -u 2048"
+ - "ulimit -a"
